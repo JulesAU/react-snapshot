@@ -51,6 +51,7 @@ export default class Crawler {
       Array.from(document.querySelectorAll(`${tagName}[${urlAttribute}]`)).forEach(element => {
         const { protocol, host, path } = url.parse(element.getAttribute(urlAttribute))
         if (protocol || host) return
+        if (!path) return;
         const relativePath = url.resolve(currentPath, path)
         if (!this.processed[relativePath]) this.paths.push(relativePath)
       })
